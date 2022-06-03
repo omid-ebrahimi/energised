@@ -1,13 +1,13 @@
-name: Test & Build
+name: Integration
 
 on:
   push:
-    branches: [ 'develop', 'master' ]
+    branches: [ develop, master ]
   pull_request:
-    branches: [ 'develop', 'master' ]
+    branches: [ develop, master ]
 
 jobs:
-  build:
+  integration:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,9 +25,8 @@ jobs:
       - name: Installing dependencies
         run: yarn install --frozen-lockfile
       - name: Building on ${{ github.ref_type }} ${{ github.ref_name }}
-        run: yarn prebuild & yarn build
+        run: yarn build
       - name: Run Unit Tests
         run: yarn test
       - name: Run e2e Tests
         run: yarn test:e2e
-
